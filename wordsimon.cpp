@@ -1,10 +1,14 @@
+#define NOMINMAX
 #include <ctime>
 #include <windows.h>
 #include <iostream>
 #include <string>
 #include <vector>
+#include <limits>
+#include <cstddef>
 
 void disp_intro();
+void pause();
 
 int main()
 {
@@ -23,7 +27,7 @@ int main()
 	char cont;
 
 	disp_intro();
-	//system("pause");
+	Sleep(1000);
 	std::cin.get();
 
 	while (loop)
@@ -95,18 +99,28 @@ int main()
 				break;
 			}
 		}
+		
 		std::cout << "Would you like to play again? [Y/N] ";
 		std::cin >> cont;
 		if (cont == 'y')
 		{
+			match.clear();
+			user_vec.clear();
+			turn = 0;
+			pause();	
 			loop = true;
 		}
 		else if (cont == 'Y')
 		{
+			match.clear();
+			user_vec.clear();
+			turn = 0;
+			pause();
 			loop = true;
 		}
 		else
 		{
+			pause();
 			loop = false;
 		}
 	}
@@ -123,3 +137,13 @@ void disp_intro()
 	This will still count as one sequence.\n\n\tExample:\n\n\tif the sequence is: march | pot of gold\n\n\tyou would enter 'march' as your first sequence, then you would enter 'pot of gold' for the second one.\n\n" << std::endl;
 	std::cout << "\n\nPress Enter to Begin." << std::endl;
 }
+
+void pause()
+{
+	std::cin.clear(); // clear failed/error states of the stream if they are set
+	if (std::cin.rdbuf()->in_avail()) // if there are any characters in the input buffer
+	{ 
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // throw them away
+	}
+} // JACOB DOMINSKI SPECIAL
+
