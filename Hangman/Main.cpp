@@ -8,7 +8,7 @@
 #include <stdio.h>
 
 void Board(int* miss);
-int CheckGuess(char input, std::vector<char>* UserWord, std::string word);
+int CheckGuess(std::string input, std::vector<char>* UserWord, std::string word);
 bool CheckWin(std::vector<char>* word);
 void Sleep(int milliseconds);
 
@@ -16,9 +16,9 @@ int main() {
 	srand(time(0));
 	int misses;
 	bool loop = true;
-	char user_input;
 	char playAgain = ' ';
 	std::string word;
+	std::string user_input;
 
 	std::vector<char> userWord;
 	std::vector<std::string> WordBank = { 
@@ -51,7 +51,7 @@ int main() {
 			}
 
 			std::cout << "\nEnter your guess (" << word << "): ";
-			user_input = getchar();
+			std::getline(std::cin, user_input);
 
 			misses += CheckGuess(user_input, &userWord, word);
 
@@ -100,31 +100,19 @@ bool CheckWin(std::vector<char>* word) {
 
 }
 
-int CheckGuess(char input, std::vector<char>* UserWord, std::string word) {
+int CheckGuess(std::string input, std::vector<char>* UserWord, std::string word) {
 
-	/*
-	The find function is not working (well technically it is). When I check if a letter
-	is inside the string, it returns the position of that letter and the number
-	4294967295. Additionally, if it could not find the letter inside the string
-	it just returns the number 4294967295. So basically, I need to find a way 
-	to check if a letter is not inside the word.
-	
-	
-	*/
-
-	if (!(word.find(input) <= word.length()) && word.find(input) != 4294967295) {
-		
-		std::cout << "\nLetter not found!\n" << word.find(input);
-		Sleep(1000);
-		return 1;
-	}
-
-	for (std::string::size_type i = 0; i < word.size(); ++i) {
-		if (word[i] == input) {
-			UserWord->at(i) = input;
+	if (word.find(input[0]) != std::string::npos) {
+		for (std::string::size_type i = 0; i < word.size(); ++i) {
+			if (word[i] == input[0]) {
+				UserWord->at(i) = input[0];
+			}
 		}
+		return 0;
 	}
-	return 0;
+
+	std::cout << "\nLetter not found!\n";
+	return 1;
 }
 
 void Board(int* miss) {
