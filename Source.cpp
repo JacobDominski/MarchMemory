@@ -314,6 +314,7 @@ void wordSimon()
 
 	disp_intro();
 	Sleep(1000);
+	system("pause");
 	std::cin.get();
 
 	while (loop)
@@ -420,7 +421,7 @@ void disp_intro()
 	You will have 3 seconds to memorize this sequence before being asked to recite it correctly.\n\
 	Sometimes a new sequence will include multiple words such as 'four leaf clover'.\n\
 	This will still count as one sequence.\n\n\tExample:\n\n\tif the sequence is: march | pot of gold\n\n\tyou would enter 'march' as your first sequence, then you would enter 'pot of gold' for the second one.\n\n" << std::endl;
-	std::cout << "\n\nPress Enter to Begin." << std::endl;
+	
 }
 
 void pause()
