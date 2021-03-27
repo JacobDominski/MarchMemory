@@ -1,3 +1,4 @@
+#define NOMINMAX
 #include <iostream>
 #include <string>
 #include <ctime>
@@ -18,6 +19,7 @@ void Sleep(int milliseconds);
 void introScramble();
 void youWinScramble();
 void disp_intro();
+void pause();
 
 void scrambleGame();
 void hangman();
@@ -27,7 +29,7 @@ void wordSimon();
 
 int main() {
 
-	
+	srand(time(NULL));
 
 	bool gameStatus = true;
 	int choice;
@@ -90,7 +92,7 @@ int main() {
 
 
 void hangman() {
-	srand(time(0));
+	
 	int misses;
 	bool loop = true;
 	char playAgain = ' ';
@@ -110,7 +112,7 @@ void hangman() {
 	};
 
 	while (loop) {
-		misses = 0;
+		misses = -1;
 		word = WordBank.at(rand() % (WordBank.size()));
 		userWord.clear();
 		for (int i = 0; i < word.length(); i++) {
@@ -127,7 +129,7 @@ void hangman() {
 				std::cout << userWord[i] << " ";
 			}
 
-			std::cout << "\nEnter your guess (" << word << "): ";
+			std::cout << "\nEnter your guess: ";
 			std::getline(std::cin, user_input);
 
 			misses += CheckGuess(user_input, &userWord, word);
@@ -145,10 +147,12 @@ void hangman() {
 		if (misses >= 6) {
 			//you lost
 			std::cout << "\nOh no! It looks like you lost!\n";
+			std::cout << "The word was " << word << std::endl;
 		}
 		else {
 			//you win
 			std::cout << "\nCongratulations! You won!\n";
+
 		}
 		std::cout << "Would you like to play again?\nYour choice (Y/N): ";
 		//play again?
@@ -220,14 +224,15 @@ void Sleep(int milliseconds)
 void scrambleGame() {
 
 	std::string terms[25] = { "March", "Madness", "Basketball", "Pie", "3.14", "Circumference", "Diameter", "Ireland", "Four leaf clover", "Pi Day", "St.Patrick’s Day", "Green", "Clover", "Rainbow", "Pot of Gold", "Horse Shoe", "Spring", "Waffle Day", "Leprechaun", "Shamrock", "Luck", "Mars", "Calendar", "Parade" };
+	std::random_shuffle(std::begin(terms), std::end(terms));
 	std::string sTerms[25];
 	for (int i = 0; i < sizeof(terms) / sizeof(terms[0]); i++) {
 		std::string word = terms[i];
 		std::random_shuffle(word.begin(), word.end());
-		if (i < 5) {
+		if (i < 25) {
 			sTerms->append(word + ",");
 		}
-		if (i == 5) {
+		if (i == 25) {
 			sTerms->append(word);
 		}
 	}
@@ -251,6 +256,7 @@ void scrambleGame() {
 		
 		int nextWord = i;
 		std::cout << scrambledTerms[nextWord] << std::endl;
+		//std::cin.clear();
 		std::cout << ">> ";
 		std::getline(std::cin,input);
 		//std::cout << terms[nextWord] << std::endl;
@@ -292,11 +298,11 @@ void youWinScramble() {
 
 void wordSimon()
 {
-	srand(time(NULL));
+	
 
 	std::string terms[] = { "march", "madness", "basketball", "pi day", "pie", "circumference", "diameter", "ireland",\
-							"four leaf clover", "3.14", "st. patrick's day", "green", "clover", "rainbow", "pot of gold",\
-							"horseshoe", "spring", "waffle day", "leprechaun", "shamrock", "luck", "mars", "calendar", "parade" };
+						"four leaf clover", "3.14", "st. patrick's day", "green", "clover", "rainbow", "pot of gold",\
+						"horseshoe", "spring", "waffle day", "leprechaun", "shamrock", "luck", "mars", "calendar", "parade" };
 
 	std::vector <std::string> user_vec;
 	std::vector <std::string> match;
@@ -307,7 +313,7 @@ void wordSimon()
 	char cont;
 
 	disp_intro();
-	//system("pause");
+	Sleep(1000);
 	std::cin.get();
 
 	while (loop)
@@ -379,18 +385,28 @@ void wordSimon()
 				break;
 			}
 		}
+
 		std::cout << "Would you like to play again? [Y/N] ";
 		std::cin >> cont;
 		if (cont == 'y')
 		{
+			match.clear();
+			user_vec.clear();
+			turn = 0;
+			pause();
 			loop = true;
 		}
 		else if (cont == 'Y')
 		{
+			match.clear();
+			user_vec.clear();
+			turn = 0;
+			pause();
 			loop = true;
 		}
 		else
 		{
+			pause();
 			loop = false;
 		}
 	}
@@ -403,4 +419,14 @@ void disp_intro()
 	Sometimes a new sequence will include multiple words such as 'four leaf clover'.\n\
 	This will still count as one sequence.\n\n\tExample:\n\n\tif the sequence is: march | pot of gold\n\n\tyou would enter 'march' as your first sequence, then you would enter 'pot of gold' for the second one.\n\n" << std::endl;
 	std::cout << "\n\nPress Enter to Begin." << std::endl;
+	Sleep(12000);
 }
+
+void pause()
+{
+	std::cin.clear(); // clear failed/error states of the stream if they are set
+	if (std::cin.rdbuf()->in_avail()) // if there are any characters in the input buffer
+	{
+		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // throw them away
+	}
+} // JACOB DOMINSKI SPECIAL
