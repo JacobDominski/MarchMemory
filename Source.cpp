@@ -393,6 +393,7 @@ void wordSimon()
 			match.clear();
 			user_vec.clear();
 			turn = 0;
+			total_score = 0;
 			pause();
 			loop = true;
 		}
@@ -401,6 +402,7 @@ void wordSimon()
 			match.clear();
 			user_vec.clear();
 			turn = 0;
+			total_score = 0;
 			pause();
 			loop = true;
 		}
@@ -419,7 +421,6 @@ void disp_intro()
 	Sometimes a new sequence will include multiple words such as 'four leaf clover'.\n\
 	This will still count as one sequence.\n\n\tExample:\n\n\tif the sequence is: march | pot of gold\n\n\tyou would enter 'march' as your first sequence, then you would enter 'pot of gold' for the second one.\n\n" << std::endl;
 	std::cout << "\n\nPress Enter to Begin." << std::endl;
-	Sleep(12000);
 }
 
 void pause()
