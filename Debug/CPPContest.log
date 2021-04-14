@@ -1,0 +1,11 @@
+﻿  Source.cpp
+C:\Users\Matt\source\repos\CPPContest\CPPContest\Source.cpp(93,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Matt\source\repos\CPPContest\CPPContest\Source.cpp(116,21): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Matt\source\repos\CPPContest\CPPContest\Source.cpp(126,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Matt\source\repos\CPPContest\CPPContest\Source.cpp(168,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Matt\source\repos\CPPContest\CPPContest\Source.cpp(295,12): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+C:\Users\Matt\source\repos\CPPContest\CPPContest\Source.cpp(327,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Matt\source\repos\CPPContest\CPPContest\Source.cpp(344,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Matt\source\repos\CPPContest\CPPContest\Source.cpp(351,22): warning C4018: '<': signed/unsigned mismatch
+C:\Users\Matt\source\repos\CPPContest\CPPContest\Source.cpp(373,23): warning C4018: '<': signed/unsigned mismatch
+  CPPContest.vcxproj -> C:\Users\Matt\source\repos\CPPContest\Debug\CPPContest.exe
